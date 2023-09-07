@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endangered Animals Map</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Link to the Leaflet library from CDN -->
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+    <script src="leaflet/leaflet.js"></script>
+    <!-- Add the "rel" attribute to specify the relationship as "stylesheet" -->
+    <link rel="stylesheet" href="endangeredAnimals.css" />
+</head>
+<body>
+    <h1>Endangered Animals Map</h1>
+    <h2>This map shows the locations of endangered animals. </h2>
+    <p>Hover on an animal icon to know where it lives.</p>
+    <p>Click on an animal icon in the map for information.</p>
+    
+   
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
+
+    <div id="search-container">
+        <input type="text" id="search-input" placeholder="Search for countries or animals">
+        <button id="search-button">Search</button>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="endangeredAnimals.js"></script>
+    <script src="search.js"></script> <!-- Create a new JS file for search functionality -->
+
+    <footer>
+        <p>&copy; 2023 Endangered Animals Website by Ralph Orland Leynes | Inspired by WWF</p>
+    </footer>
+</body>
+</html>
