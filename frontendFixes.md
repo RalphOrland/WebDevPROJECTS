@@ -24,6 +24,33 @@ https://ralphorland.github.io/javascript-photo-gallery/src/index.html <br />
 
 ------------------------------------------------------------------------------------------------ <br />
 
+https://github.com/developer-job-simulation/javascript-crm<br />
+
+This is a CRM built with in HTML/CSS/JS. This webapp helps our business department keep track of their interactions with clients.<br />
+
+The job is to fix 4 issues:<br />
+
+-Company Names are Missing<br />
+-Display Dates in 24-hour Time Format<br />
+-Display Revenue Numbers in a Human Readable Form<br />at
+-Make Table Look Prettier<br />
+
+Learning Objectives:<br />
+
+I practiced and gained experience with:<br />
+
+-Using ISO 8601 Dates in JavaScript<br />
+-Working with HTML Tables<br />
+-Applying CSS Styles to HTML Tables<br />
+-Currency Formatting in JavaScript<br />
+-Pulling Data from APIs<br />
+
+My solution:<br />
+https://github.com/RalphOrland/javascript-crm/commit/a7fabdea33c1847bc68124ce757867c5b9439b21 <br />
+
+
+------------------------------------------------------------------------------------------------ <br />
+
 https://github.com/developer-job-simulation/javascript-login-form <br />
 
 This is a simple login form made with vanilla JavaScript, HTML, and CSS. The job is to fix 5 issues: <br />
