@@ -90,7 +90,7 @@ I learned and gained experience with:
   { id: 3, username: "email@domain.com", password: "badpassword" }, <br />
 
 
-**my Solutions:** <br />
+**My solutions:** <br />
 
 https://github.com/RalphOrland/javascript-login-form/commit/822750dab8d9071b497b127c6d9180386a621e5e<br />
 
