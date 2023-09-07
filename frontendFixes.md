@@ -27,8 +27,12 @@ I learned and gained experience with:<br />
 -Manipulating DOM elements and updating their properties.<br />
 -Conditionally disabling buttons based on application state.<br />
 
-My solution:<br />
+My solutions:<br />
+
+https://github.com/RalphOrland/javascript-photo-gallery/commit/b4ec9cec05fc394d8aab76b28398f0b17c3966b1<br />
+
 https://ralphorland.github.io/javascript-photo-gallery/src/index.html <br />
+
 
 
 ------------------------------------------------------------------------------------------------ <br />
@@ -87,7 +91,10 @@ stored credentials for testing: <br />
   { id: 3, username: "email@domain.com", password: "badpassword" }, <br />
 
 
-my Solution: <br />
+my Solutions: <br />
+
+https://github.com/RalphOrland/javascript-login-form/commit/822750dab8d9071b497b127c6d9180386a621e5e<br />
+
 https://ralphorland.github.io/javascript-login-form/src/index.html <br />
 
 ------------------------------------------------------------------------------------------------ <br />
@@ -113,10 +120,11 @@ I learned and gained experience with:<br />
 -Clientside Form Validation.<br />
 -Navigating a Large, Messy CSS File.<br />
 
-My solution:<br />
+My solutions:<br />
+
+https://github.com/RalphOrland/javascript-landing-page/commit/bf27292aa14546a64a18f1ff5a70b04062cf4db9<br/>
 
 https://ralphorland.github.io/javascript-landing-page/src/index.html#header <br />
-
 
 stored credentials for testing: <br />
   { id: 1, username: "hello@world.com" }, <br />
