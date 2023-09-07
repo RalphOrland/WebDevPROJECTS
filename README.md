@@ -11,6 +11,6 @@ https://ralphorland.github.io/webdevProjects/AgreeculturistWebsite/index.html
 Preview my Endangered Animals Map using this link:  <br />
 https://ralphorland.github.io/webdevProjects/EndangeredAnimalsMap/index.html 
 
-Other of web-dev related activities: <br />
+Other of my web-dev related activities: <br />
 https://github.com/RalphOrland/webdevProjects/blob/main/frontendFixes.md
 
