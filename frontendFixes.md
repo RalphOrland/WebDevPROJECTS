@@ -35,7 +35,7 @@ https://ralphorland.github.io/javascript-photo-gallery/src/index.html <br />
 
 https://github.com/developer-job-simulation/javascript-crm<br />
 
-This is a CRM built with in HTML/CSS/JS. This webapp helps our business department keep track of their interactions with clients.<br />
+This is a CRM built with in HTML/CSS/JS. This webapp helps a business department keep track of their interactions with their clients.<br />
 
 The job is to fix 4 issues:<br />
 
@@ -94,7 +94,7 @@ https://ralphorland.github.io/javascript-login-form/src/index.html <br />
 
 https://github.com/developer-job-simulation/javascript-landing-page <br />
 
-his is a landing page written in HTML/CSS/JS. The job is to fix these issues: <br />
+This is a landing page written in HTML/CSS/JS. The job is to fix these issues: <br />
 
 -Nav Buttons Don't Work <br />
 -Desktop Nav Is Visible on Mobile <br />
