@@ -300,6 +300,7 @@ img{
 	margin-right: 10px;
 	margin-top: -1px;
 	padding: 0;
+	float: left;
 }
 .logo-compressed {
 	height: 80px;  
@@ -310,8 +311,9 @@ img{
 	width: 100%;
 }
 #navbar {
-	float: left;
-	width: 63%;
+	float: center;
+	width: 93%;
+	align-items: center;
 }
 .main-nav {
 	display: inline-block;
