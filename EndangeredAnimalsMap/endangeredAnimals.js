@@ -4,7 +4,7 @@ var bounds = L.latLngBounds(southWest, northEast);
 
 var map = L.map('map', {
     minZoom: 3,
-    maxZoom: 5,
+    maxZoom: 4,
     maxBounds: bounds, // Set the maximum bounds for the map
 }).setView([32, 73], 3);
 
@@ -49,10 +49,11 @@ var grauerGorillaIcon = L.icon({
 
 // Custom icon for the country markers
 var countryIcon = L.icon({
-    iconUrl: 'icons/pin-icon.png', // Replace with the path to your pin icon image (with transparent background)
+    iconUrl: 'icons/pin-icon.png', // Replace with the path to pin icon image (with transparent background)
     iconSize: [40, 40],
     iconAnchor: [15, 45],
     popupAnchor: [0, -30],
+    zIndex: 1,
 });
 
 
@@ -103,7 +104,7 @@ var endangeredAnimals = [
 
     {
         name: 'Black Rhinoceros',
-        latlng: [-5.30, 25.82], 
+        latlng: [2.30, 30.82], 
         status: 'Critically Endangered',
         population: 'More than 6,000',
         scientificName: '_Diceros bicornis_',

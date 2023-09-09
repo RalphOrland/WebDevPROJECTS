@@ -85,6 +85,7 @@ p {
     cursor: pointer; /* Add a cursor pointer on hover */
     /* Add a transition for smooth animation */
     transition: transform 0.3s ease;
+    z-index: 2;
 }
 
 .animal-icon.animal-icon-hover {
@@ -143,7 +144,7 @@ p {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgb(44, 82, 39);
+    background-color: rgb(21, 41, 19);
     padding: 20px;
     border-radius: 5px;
     z-index: 1000; /* Ensure modal appears above the map */
@@ -156,7 +157,7 @@ p {
     right: 10px;
     cursor: pointer;
     font-size: 24px;
-    color: #000;
+    color: #f0f0f0;
 }
 
 .modal-content img {
