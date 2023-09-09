@@ -3,10 +3,10 @@ var northEast = L.latLng(90, 180);   // Northeast corner of the bounds (latitude
 var bounds = L.latLngBounds(southWest, northEast);
 
 var map = L.map('map', {
-    minZoom: 2,
+    minZoom: 3,
     maxZoom: 5,
     maxBounds: bounds, // Set the maximum bounds for the map
-}).setView([32, 53], 3);
+}).setView([32, 73], 3);
 
 L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
     attribution: '<a href="https://stamen.com">Stamen</a>',
@@ -137,7 +137,7 @@ var endangeredAnimals = [
 function getCountryCenter(country) {
   
     const countryCenters = {
-        'Gabon': [-0.6, 11.6], // Replace these coordinates with the actual coordinates of the countries
+        'Gabon': [-0.6, 11.6], 
         'Republic of Congo': [-0.2, 15],
         'Cameroon': [6, 12],
         'Russia': [61.5240, 105.3188],
@@ -160,7 +160,7 @@ endangeredAnimals.forEach(animal => {
         const marker = L.marker(animal.latlng, { icon: icon }).addTo(map);
 
         var popupContent = `<div class="popup-container"><b>${animal.name}</b><br>
-        <b>Status:</b>  <span style="color: red">${animal.status}</span><br>`;
+        <b>Status:</b>  <br>`;
 
         
     if (animal.height) {
@@ -183,18 +183,6 @@ endangeredAnimals.forEach(animal => {
         popupContent += '</ul>';
     }
 
-    popupContent += '<div class="image-popup-container">'; // Image popup container starts here
-
-    // Add the image to the popup content
-    popupContent += `<img class="image-popup" src="${animal.image}" alt="${animal.name} Image">`;
-
-    popupContent += '</div>'; // Image popup container ends here
- 
-    popupContent += '<br>'; 
-
-    popupContent += `${animal.description}</div>`; // Description div ends here
-
-    marker.bindPopup(popupContent);
 
 // Event listener for the marker mouseover event
 marker.on('mouseover', function () {
@@ -270,47 +258,42 @@ animal.countries.forEach(country => {
         }, 200);
     });
 
-// Event listener for the marker click event
-    // Event listener for the marker click event
-    marker.on('click', function () {
-        // Hide the previous description container if it's open
-        var previousDescription = document.querySelector('#animal-description-container');
-        if (previousDescription.style.display === 'block') {
-            previousDescription.style.display = 'none';
-        }
 
-        // Show the description container for the clicked animal
-        var descriptionContainer = document.querySelector('#animal-description-container');
-        descriptionContainer.style.display = 'block';
+
+    marker.on('click', function () {
+        // Show the modal
+        var modal = document.getElementById('animal-modal');
+        modal.style.display = 'block';
+
+        // Populate modal content with animal information
+        var descriptionContainer = document.getElementById('animal-description-container');
         descriptionContainer.innerHTML = `
-            <div id="animal-name">${animal.name}</div>
-            <div id="animal-status">${animal.status}</div>
-            <div class="animal-detail">Height: ${animal.height}</div>
-            <div class="animal-detail">Weight: ${animal.weight}</div>
-            <div class="animal-detail">Habitats: ${animal.habitats}</div>
-            <div class="animal-detail">Countries: ${animal.countries.join(', ')}</div>
-            <div class="animal-detail">${animal.description}</div>
+
+        
+        <img src="${animal.image}" alt="${animal.name} Image">
+
+            <h3 id="animal-name">${animal.name}</h3>
+            <div id="animal-status" style="color: red">${animal.status}</span></div>
+            <div class="animal-detail" style="color: white">Height: ${animal.height}</div>
+            <div class="animal-detail" style="color: white">Weight: ${animal.weight}</div>
+            <div class="animal-detail" style="color: white">Habitats: ${animal.habitats}</div>
+            <div class="animal-detail" style="color: white">Countries: ${animal.countries.join(', ')}</div>
+            <div class="animal-detail" style="color: white">${animal.description}</div>
         `;
 
-        // Update the position of the description container relative to the marker position
-        var markerLatLng = marker.getLatLng();
-        var mapContainer = document.querySelector('#map-container');
-        var mapWidth = mapContainer.offsetWidth;
-        var descriptionWidth = descriptionContainer.offsetWidth;
-        var descriptionHeight = descriptionContainer.offsetHeight;
-        descriptionContainer.style.top = (markerLatLng.y - descriptionHeight - 20) + 'px';
-        descriptionContainer.style.left = (mapWidth - descriptionWidth - 20) + 'px';
+        // Event listener for the modal close button
+        var modalClose = document.getElementById('modal-close');
+        modalClose.addEventListener('click', function () {
+            modal.style.display = 'none'; // Close the modal
+        });
 
-
-
-// Event listener for the map click event to clear the pins when clicking elsewhere on the map
-map.on('click', function () {
-    animalMarkers.clearLayers();
-    countryMarkers.clearLayers();
-});
-
-});
-
+        // Event listener to close the modal when clicking outside the modal content
+        window.addEventListener('click', function (event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
 }
 
 });

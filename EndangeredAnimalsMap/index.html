@@ -20,12 +20,17 @@
    
     <div id="map-container">
         <div id="map"></div>
+        <div id="animal-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="modal-close">&times;</span>
+                <div id="animal-description-container">
+                    <!-- Modal content goes here -->
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div id="search-container">
-        <input type="text" id="search-input" placeholder="Search for countries or animals">
-        <button id="search-button">Search</button>
-    </div>
+    
+    
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="endangeredAnimals.js"></script>
