@@ -83,7 +83,7 @@ var endangeredAnimals = [
         habitats: 'dense tropical forests',
         countries: ['Gabon', 'Republic of Congo', 'Cameroon'], // Add the countries where the animal lives
         description:
-            'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/african-forest-elephant" target="_blank">https://www.worldwildlife.org/species/african-forest-elephant</a>',
+            'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/african-forest-elephant" style="color: #8adf82"; target="_blank">https://www.worldwildlife.org/species/african-forest-elephant</a>',
         image: 'animalImages/african_forest_elephant.png', // Add the image URL here
     },
 
@@ -97,7 +97,7 @@ var endangeredAnimals = [
         habitats: 'Temperate, Broadleaf, and Mixed Forests',
         countries: ['Russia', 'China', 'North Korea'], // Add the countries where the animal lives
         description:
-            'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/amur-leopard" target="_blank">https://www.worldwildlife.org/species/amur-leopard</a>',
+            'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/amur-leopard" style="color: #8adf82"; target="_blank">https://www.worldwildlife.org/species/amur-leopard</a>',
         image: 'animalImages/amur_leopard.png', // Add the image URL here
     },
 
@@ -111,7 +111,7 @@ var endangeredAnimals = [
         habitats: 'Temperate, Broadleaf, and Mixed Forests',
         countries: ['Kenya', 'Tanzania', 'Namibia', 'South Africa', 'Zimbabwe'],  // Add the countries where the animal lives
         description:
-            'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/black-rhino" target="_blank">https://www.worldwildlife.org/species/black-rhino</a>',
+            'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/black-rhino"style="color: #8adf82"; target="_blank">https://www.worldwildlife.org/species/black-rhino</a>',
         image: 'animalImages/black_rhino.png', // Add the image URL here
     },
 
@@ -126,7 +126,7 @@ var endangeredAnimals = [
         habitats: 'Tropical and Subtropical Moist Broadleaf Forests',
         countries: ['Republic of Congo'],
         description:
-            'To learn more about these incredible gorillas, visit: <a href="https://www.worldwildlife.org/species/eastern-lowland-gorilla" target="_blank">https://www.worldwildlife.org/species/eastern-lowland-gorilla</a>',
+            'To learn more about these incredible gorillas, visit: <a href="https://www.worldwildlife.org/species/eastern-lowland-gorilla" style="color: #8adf82"; target="_blank">https://www.worldwildlife.org/species/eastern-lowland-gorilla</a>',
         image: 'animalImages/grauers_gorilla.png',
     },
     
@@ -268,18 +268,21 @@ animal.countries.forEach(country => {
         // Populate modal content with animal information
         var descriptionContainer = document.getElementById('animal-description-container');
         descriptionContainer.innerHTML = `
-
-        
         <img src="${animal.image}" alt="${animal.name} Image">
-
-            <h3 id="animal-name">${animal.name}</h3>
-            <div id="animal-status" style="color: red">${animal.status}</span></div>
-            <div class="animal-detail" style="color: white">Height: ${animal.height}</div>
-            <div class="animal-detail" style="color: white">Weight: ${animal.weight}</div>
-            <div class="animal-detail" style="color: white">Habitats: ${animal.habitats}</div>
-            <div class="animal-detail" style="color: white">Countries: ${animal.countries.join(', ')}</div>
-            <div class="animal-detail" style="color: white">${animal.description}</div>
-        `;
+        <h3 id="animal-name">${animal.name}</h3>
+        <div id="animal-status" style="color: red; font-weight: bold;">${animal.status}</div>
+        <div class="animal-detail" style="color: white;"><span style="font-weight: bold; font-size: 16px;">Height:</span> ${animal.height}</div>
+        <div class="animal-detail" style="color: white;"><span style="font-weight: bold; font-size: 16px;">Weight:</span> ${animal.weight}</div>
+        <div class="animal-detail" style="color: white;"><span style="font-weight: bold; font-size: 16px;">Habitats:</span> ${animal.habitats}</div>
+        <div class="animal-detail" style="color: white;"><span style="font-weight: bold; font-size: 16px;">Countries:</span> ${animal.countries.join(', ')}</div>
+        <br/>
+        <div class="animal-detail" style="color: #66d825; font-size: 16px;">${animal.description}</div>
+        
+       
+    `;
+    
+    
+    
 
         // Event listener for the modal close button
         var modalClose = document.getElementById('modal-close');
