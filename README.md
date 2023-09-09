@@ -8,7 +8,7 @@ Preview of my Investor's site (Please note that this website requires running a 
 <a href ="https://ralphorland.github.io/webdevProjects/AgreeculturistWebsite/index.html" target="_blank"> Here <a/>  <br />
 
 Preview of my Endangered Animals Map:  <br />
-(https://ralphorland.github.io/webdevProjects/EndangeredAnimalsMap/index.html) {:target="_blank"} [Here]  <br />
+<a href ="https://ralphorland.github.io/webdevProjects/EndangeredAnimalsMap/index.html" target="_blank"> Here <a/> <br />
 
 Other of my web-dev related activities: <br />
 <a href="https://github.com/RalphOrland/webdevProjects/blob/main/frontendFixes.md" target="_blank"> Here <a/> <br />
