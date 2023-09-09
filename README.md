@@ -1,7 +1,7 @@
 # WebDevPROJECTS
 Welcome to My Web dev projects!
 
-Here, I want to showcase my passion for web development, and my skills and show that I can create websites. Although take note that they are all still in progress.
+Here, I want to showcase my passion for web development, and my skills and show that I can create websites. Although, they are all still in progress.
 
 Anyway...
 
