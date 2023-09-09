@@ -19,7 +19,7 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{e
 // Custom icon for the elephant marker
 var elephantIcon = L.icon({
     iconUrl: 'icons/elephant-icon.png', // path to elephant icon image
-    iconSize: [120, 120],
+    iconSize: [110, 110],
     iconAnchor: [35, 35],
     popupAnchor: [0, -35],
 });
@@ -34,14 +34,14 @@ var leopardIcon = L.icon({
 
 var rhinoIcon = L.icon({
     iconUrl: 'icons/blackRhino-icon.png', // path to leopard icon image
-    iconSize: [100, 60],
+    iconSize: [85, 50],
     iconAnchor: [35, 35],
     popupAnchor: [0, -35],
 });
 
 var grauerGorillaIcon = L.icon({
     iconUrl: 'icons/grauerGorilla-icon.png', // path to leopard icon image
-    iconSize: [80, 65],
+    iconSize: [75, 55],
     iconAnchor: [35, 35],
     popupAnchor: [0, -35],
 });
@@ -55,6 +55,18 @@ var countryIcon = L.icon({
     popupAnchor: [0, -30],
 });
 
+
+      // Create an object to map animal names to their icons
+      const animalIcons = {
+        'African Forest Elephant': elephantIcon,
+        'Amur Leopard': leopardIcon,
+        'Black Rhinoceros': rhinoIcon,
+        'Eastern Lowland Gorilla' : grauerGorillaIcon,
+    
+        
+      };
+
+
 // Define a separate layer group for animal markers
 var animalMarkers = L.layerGroup().addTo(map);
 
@@ -64,7 +76,7 @@ var countryMarkers = L.layerGroup().addTo(map);
 var endangeredAnimals = [
     {
         name: 'African Forest Elephant',
-        latlng: [30, 14.0], // Replace these coordinates with the actual coordinates of the African Forest Elephant
+        latlng: [22, 18.0], // Replace these coordinates with the actual coordinates of the African Forest Elephant
         status: 'Critically Endangered',
         height: '8-10 feet',
         weight: '2-5 tons',
@@ -141,26 +153,16 @@ function getCountryCenter(country) {
     return countryCenters[country];
 }
 
-var mouseoverTimer;
-var currentAnimalMarker;
 
 endangeredAnimals.forEach(animal => {
-    var marker;
-    if (animal.name === 'African Forest Elephant') {
-        marker = L.marker(animal.latlng, { icon: elephantIcon }).addTo(map);
-    } else if (animal.name === 'Amur Leopard') {
-        marker = L.marker(animal.latlng, { icon: leopardIcon }).addTo(map);
-    }
-      else if (animal.name === 'Black Rhinoceros') {
-        marker = L.marker(animal.latlng, { icon: rhinoIcon }).addTo(map);
-    }
-      else if (animal.name === 'Eastern Lowland Gorilla') {
-        marker = L.marker(animal.latlng, { icon: grauerGorillaIcon }).addTo(map);
-    }   
+    const icon = animalIcons[animal.name]; // Get the icon based on the animal's name
+    if (icon) {
+        const marker = L.marker(animal.latlng, { icon: icon }).addTo(map);
 
-    var popupContent = `<div class="popup-container"><b>${animal.name}</b><br>
-    <b>Status:</b>  <span style="color: red">${animal.status}</span><br>`;
+        var popupContent = `<div class="popup-container"><b>${animal.name}</b><br>
+        <b>Status:</b>  <span style="color: red">${animal.status}</span><br>`;
 
+        
     if (animal.height) {
         popupContent += `<b>Height:</b> ${animal.height}<br>`;
     }
@@ -197,43 +199,39 @@ endangeredAnimals.forEach(animal => {
 // Event listener for the marker mouseover event
 marker.on('mouseover', function () {
     // Calculate the new icon size (2x of the original size)
-    var originalIconSize = (animal.name === 'African Forest Elephant') ? [80, 80] : [70, 40];
-    var newIconSize = originalIconSize.map(size => size * 2);
 
-    // Calculate the icon anchor and popup anchor
-    var iconAnchor = [newIconSize[0] / 2, newIconSize[1]];
-    var popupAnchor = [0, -newIconSize[1] / 2];
+    var iconSizeMap = {
+        'African Forest Elephant': [110, 110],
+        'Amur Leopard': [90, 50],
+        'Black Rhinoceros': [95, 60],
+        'Eastern Lowland Gorilla': [75, 55],
+    };
+    
+    
+    // Determine the original icon size based on the animal name
+    var originalIconSize = iconSizeMap[animal.name] || defaultIconSize;
+    var newIconSize = originalIconSize.map(size => size * 1.2);
 
-      
+    // Keep the icon anchor and popup anchor the same
+    var iconAnchor = [originalIconSize[0] / 2, originalIconSize[1]];
+    var popupAnchor = [0, -originalIconSize[1] / 2];
+
+        // Set the new icon size while keeping the anchor points unchanged
+        marker.setIcon(
+            L.icon({
+                iconUrl: marker.options.icon.options.iconUrl, // Keep the same icon URL
+                iconSize: newIconSize,
+                iconAnchor: iconAnchor,
+                popupAnchor: popupAnchor,
+            })
+
+        )
           // Set the default icon path for any other animal
-this.setIcon(
-    L.icon({
-      iconUrl:
-        animal.name === 'African Forest Elephant'
-          ? 'icons/elephant-icon.png'
-          : animal.name === 'Amur Leopard'
-          ? 'icons/leopard-icon.png'
-          : animal.name === 'Black Rhinoceros'
-          ? 'icons/blackRhino-icon.png'
-          : animal.name === 'Eastern Lowland Gorilla'
-          ? 'icons/grauerGorilla-icon.png'
-          : 'icons/default-icon.png', 
-          
-          iconSize: newIconSize,
-          iconAnchor: iconAnchor,
-          popupAnchor: popupAnchor,
-    })
-  );
+
   
 
-      // Create an object to map animal names to their icons
-const animalIcons = {
-    'African Forest Elephant': elephantIcon,
-    'Amur Leopard': leopardIcon,
-    'Black Rhinoceros': rhinoIcon,
-    'Eastern Lowland Gorilla' : grauerGorillaIcon,
-  };
   
+
   // Event listener for the marker mouseout event
   marker.on('mouseout', function () {
     // Get the appropriate icon from the animalIcons object based on the animal name
@@ -313,5 +311,6 @@ map.on('click', function () {
 
 });
 
+}
 
 });
