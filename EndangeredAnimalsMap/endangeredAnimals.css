@@ -117,12 +117,15 @@ p {
 
 /* Styling for the tooltip */
 .leaflet-tooltip {
-    background-color: #52aa1e;
-    border: 1px solid #ccc;
+    background-color: #3b6921;
+    border: 3px solid #83e216;
     padding: 5px;
     font-weight: bold;
     white-space: nowrap;
+    color: #fff; /* Set text color to white */
+    font-size: 20px; /* Adjust the font size as needed */
 }
+
 
 /* Hide the modal by default */
 #animal-modal {
