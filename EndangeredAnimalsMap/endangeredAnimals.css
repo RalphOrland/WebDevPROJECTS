@@ -170,6 +170,24 @@ p {
     color: #646964;
 }
 
+/* Define the blinking animation */
+@keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* Apply the blinking animation to elements with the 'blink-animation' class */
+  .blink-animation {
+    animation: blink 2s infinite; /* Adjust the duration as needed */
+  }
+  
 
 
 

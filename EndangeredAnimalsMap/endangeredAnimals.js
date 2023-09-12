@@ -78,7 +78,7 @@ var countryIcon = L.icon({
         'Black Rhinoceros': rhinoIcon,
         'Eastern Lowland Gorilla' : grauerGorillaIcon,   
         'Giant Panda' : giantPandaIcon,
-        'Tiger': tigerIcon
+        'Tiger': tigerIcon,
         
       };
 
@@ -153,7 +153,7 @@ var endangeredAnimals = [
         population: '1,864 in the wild',
         scientificName: '_Ailuropoda melanoleuca_',
         height: 'Adults can grow to more than four feet.',
-        weight: '220–330 pounds',
+        weight: '220-330 pounds',
         habitats: 'Temperate broadleaf and mixed forests of southwest China',
         countries: ['China'],
         description:
@@ -163,12 +163,12 @@ var endangeredAnimals = [
     
     {
         name: 'Tiger',
-        latlng: [12.6392, 101.1452], // Replace with the actual coordinates of the Tiger
+        latlng: [12.6392, 77.0], // Replace with the actual coordinates of the Tiger
         status: 'Endangered',
         population: 'About 4,500',
-        scientificName: 'Panthera tigris',
-        weight: '220–660 pounds',
-        length: '6–10 feet',
+        scientificName: '_Panthera tigris_',
+        weight: '220-660 pounds',
+        length: '6-10 feet',
         habitats: 'Tropical rainforests, evergreen forests, temperate forests, mangrove swamps, grasslands, and savannas',
         countries: ['India', 'Bangladesh', 'Nepal', 'Bhutan'],
         description:
@@ -195,6 +195,10 @@ function getCountryCenter(country) {
         'Namibia': [-22.9576, 18.4904],
         'South Africa': [-30.5595, 22.9375],
         'Zimbabwe': [-19.0154, 29.1549],
+        'India': [28.6139, 77.2090],
+        'Bangladesh': [23.8103, 90.4125],
+        'Nepal': [27.7172, 85.3240],
+        'Bhutan': [27.4728, 89.6390]
         // Add more countries and their center coordinates as needed
     };
     return countryCenters[country];
@@ -240,7 +244,8 @@ marker.on('mouseover', function () {
         'Amur Leopard': [90, 50],
         'Black Rhinoceros': [95, 60],
         'Eastern Lowland Gorilla': [75, 55],
-        'Giant Panda': [85,60]
+        'Giant Panda': [85,60],
+        'Tiger' : [95, 52.5],
     };
     
     
@@ -262,50 +267,57 @@ marker.on('mouseover', function () {
             })
 
         )
-          // Set the default icon path for any other animal
 
-  
+// Function to clear the pins and tooltips
+function clearPinsAndTooltips() {
+    animalMarkers.clearLayers(); // Clear existing animal pins
+    countryMarkers.clearLayers(); // Clear existing country pins
+}
 
-  
-
-  // Event listener for the marker mouseout event
-  marker.on('mouseout', function () {
-    // Get the appropriate icon from the animalIcons object based on the animal name
-    const animalIcon = animalIcons[animal.name] || defaultIcon;
-  
-    // Restore the original icon size on mouseout
-    this.setIcon(animalIcon);
-    clearTimeout(mouseoverTimer); // Clear the mouseover timer
-  });
-  
-        // Show the pins when hovering over the animal icon after a delay of 200ms
-        mouseoverTimer = setTimeout(function () {
-            animalMarkers.clearLayers(); // Clear existing animal pins
-            countryMarkers.clearLayers(); // Clear existing country pins
-
-          // Add markers to countries where the animal lives
-animal.countries.forEach(country => {
-    var countryMarker = L.marker(getCountryCenter(country), { icon: countryIcon }).addTo(countryMarkers);
-    // Remove the line below to disable click popup
-    // countryMarker.bindPopup(country);
-
-    // Add event listeners to show/hide the tooltip on hover
-    countryMarker.on('mouseover', function () {
-        this.openTooltip();
-    });
-
-    countryMarker.on('mouseout', function () {
-        this.closeTooltip();
-    });
+// Function to create a pin icon with the blinking animation class
+function createPinIcon(country) {
+    const countryMarker = L.marker(getCountryCenter(country), { icon: countryIcon }).addTo(countryMarkers);
 
     // Add tooltip to the country marker
-    countryMarker.bindTooltip(country, { permanent: false, direction: 'top' });
+    countryMarker.bindTooltip(country, { permanent: false, direction: 'top', offset: [0, -50] });
+
+    // Add your CSS class for the blinking animation here (e.g., 'blink-animation')
+    countryMarker.getElement().classList.add('blink-animation');
+}
+
+// Function to remove the blinking animation class from the active pin icons
+function removeBlinkAnimation() {
+    countryMarkers.eachLayer(function (layer) {
+        // Remove the CSS class for blinking animation here (e.g., 'blink-animation')
+        layer.getElement().classList.remove('blink-animation');
+    });
+}
+
+// Event listener for the marker mouseout event
+marker.on('mouseout', function () {
+    // Get the appropriate icon from the animalIcons object based on the animal name
+    const animalIcon = animalIcons[animal.name] || defaultIcon;
+
+    // Restore the original icon size on mouseout
+    this.setIcon(animalIcon);
+
+    // Remove the blinking animation class when the mouse leaves the animal icon
+    removeBlinkAnimation();
 });
 
-            animalMarkers.addTo(map); // Show the animal pins when hovering over the animal icon
-        }, 200);
+// Show the pins when hovering over the animal icon after a delay of 200ms
+mouseoverTimer = setTimeout(function () {
+    clearPinsAndTooltips(); // Clear pins and tooltips initially
+
+    // Add markers to countries where the animal lives
+    animal.countries.forEach(country => {
+        createPinIcon(country);
     });
 
+    animalMarkers.addTo(map); // Show the animal pins when hovering over the animal icon
+}, 200);
+
+});
 
 
     marker.on('click', function () {
