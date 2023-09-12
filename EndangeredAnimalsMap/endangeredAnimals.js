@@ -41,7 +41,21 @@ var rhinoIcon = L.icon({
 
 var grauerGorillaIcon = L.icon({
     iconUrl: 'icons/grauerGorilla-icon.png', // path to leopard icon image
-    iconSize: [75, 55],
+    iconSize: [72, 55],
+    iconAnchor: [35, 35],
+    popupAnchor: [0, -35],
+});
+
+var giantPandaIcon = L.icon({
+    iconUrl: 'icons/giantPanda-icon.png', // path to leopard icon image
+    iconSize: [82, 60],
+    iconAnchor: [35, 35],
+    popupAnchor: [0, -35],
+});
+
+var tigerIcon = L.icon({
+    iconUrl: 'icons/tiger-icon.png', // path to leopard icon image
+    iconSize: [95, 52.5],
     iconAnchor: [35, 35],
     popupAnchor: [0, -35],
 });
@@ -62,8 +76,9 @@ var countryIcon = L.icon({
         'African Forest Elephant': elephantIcon,
         'Amur Leopard': leopardIcon,
         'Black Rhinoceros': rhinoIcon,
-        'Eastern Lowland Gorilla' : grauerGorillaIcon,
-    
+        'Eastern Lowland Gorilla' : grauerGorillaIcon,   
+        'Giant Panda' : giantPandaIcon,
+        'Tiger': tigerIcon
         
       };
 
@@ -104,7 +119,7 @@ var endangeredAnimals = [
 
     {
         name: 'Black Rhinoceros',
-        latlng: [2.30, 30.82], 
+        latlng: [5.30, 30.82], 
         status: 'Critically Endangered',
         population: 'More than 6,000',
         scientificName: '_Diceros bicornis_',
@@ -118,7 +133,7 @@ var endangeredAnimals = [
 
     {
         name: 'Eastern Lowland Gorilla',
-        latlng: [-0.2, 15], 
+        latlng: [-4.2, 15], 
         status: 'Critically Endangered',
         population: 'Unknown',
         scientificName: '_Gorilla beringei graueri_',
@@ -130,6 +145,37 @@ var endangeredAnimals = [
             'To learn more about these incredible gorillas, visit: <a href="https://www.worldwildlife.org/species/eastern-lowland-gorilla" style="color: #8adf82"; target="_blank">https://www.worldwildlife.org/species/eastern-lowland-gorilla</a>',
         image: 'animalImages/grauers_gorilla.png',
     },
+
+    {
+        name: 'Giant Panda',
+        latlng: [30.5928, 101.9019], // Replace with the actual coordinates of the Giant Panda
+        status: 'Vulnerable',
+        population: '1,864 in the wild',
+        scientificName: '_Ailuropoda melanoleuca_',
+        height: 'Adults can grow to more than four feet.',
+        weight: '220–330 pounds',
+        habitats: 'Temperate broadleaf and mixed forests of southwest China',
+        countries: ['China'],
+        description:
+            'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/giant-panda" style="color: #8adf82" target="_blank">https://www.worldwildlife.org/species/giant-panda</a>',
+        image: 'animalImages/giant_panda.png' // Add the image URL here
+    },
+    
+    {
+        name: 'Tiger',
+        latlng: [12.6392, 101.1452], // Replace with the actual coordinates of the Tiger
+        status: 'Endangered',
+        population: 'About 4,500',
+        scientificName: 'Panthera tigris',
+        weight: '220–660 pounds',
+        length: '6–10 feet',
+        habitats: 'Tropical rainforests, evergreen forests, temperate forests, mangrove swamps, grasslands, and savannas',
+        countries: ['India', 'Bangladesh', 'Nepal', 'Bhutan'],
+        description:
+            'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/tiger" style="color: #8adf82" target="_blank">https://www.worldwildlife.org/species/tiger</a>',
+        image: 'animalImages/tiger.png' // Add the image URL here
+    }
+    
     
     //  animals here...
 ];
@@ -194,12 +240,13 @@ marker.on('mouseover', function () {
         'Amur Leopard': [90, 50],
         'Black Rhinoceros': [95, 60],
         'Eastern Lowland Gorilla': [75, 55],
+        'Giant Panda': [85,60]
     };
     
     
     // Determine the original icon size based on the animal name
     var originalIconSize = iconSizeMap[animal.name] || defaultIconSize;
-    var newIconSize = originalIconSize.map(size => size * 1.2);
+    var newIconSize = originalIconSize.map(size => size * 1.6);
 
     // Keep the icon anchor and popup anchor the same
     var iconAnchor = [originalIconSize[0] / 2, originalIconSize[1]];

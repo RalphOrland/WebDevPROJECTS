@@ -88,10 +88,6 @@ p {
     z-index: 2;
 }
 
-.animal-icon.animal-icon-hover {
-    /* Hover size */
-    transform: scale(1.2);
-}
 
 /* Add any additional CSS styles here */
 
