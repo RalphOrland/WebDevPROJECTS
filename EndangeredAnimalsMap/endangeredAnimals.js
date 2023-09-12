@@ -338,12 +338,8 @@ mouseoverTimer = setTimeout(function () {
         <br/>
         <div class="animal-detail" style="color: #66d825; font-size: 16px;">${animal.description}</div>
         
-       
     `;
     
-    
-    
-
         // Event listener for the modal close button
         var modalClose = document.getElementById('modal-close');
         modalClose.addEventListener('click', function () {
