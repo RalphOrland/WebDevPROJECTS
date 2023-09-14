@@ -5,11 +5,11 @@ h1 {
     background-size: cover; /* Adjust the background-size property as needed */
     background-position: top; /* Adjust the background-position property as needed */
     height: 90px; /* Adjust the height of the header as needed */
-    color: rgb(60, 61, 6); /* Set text color for the header */
+    color: rgb(77, 175, 31); /* Set text color for the header */
     text-align: center; /* Center align the text in the header */
     padding-top: 45px; /* Adjust the padding to vertically center the text in the header */
     margin-top: auto;
-    opacity: 0.6;
+    opacity: 1;
 }
 
 body {
@@ -236,13 +236,22 @@ p {
     text-decoration: none; /* Remove underlines from links */
     border-radius: 5px; /* Rounded corners for buttons */
     display: inline-block; /* Make the button inline */
+    margin-top: 50px;
+    animation: zoomAnimation 1s infinite alternate;
 }
 
 .btn-primary:hover {
     background-color: #b5d32f; /* Hover color for buttons */
 }
 
-
+@keyframes zoomAnimation {
+    0% {
+        transform: scale(1); /* Initial size */
+    }
+    100% {
+        transform: scale(1.1); /* Zoom in by 10% */
+    }
+}
 
 
 /* Other styles remain the same */
