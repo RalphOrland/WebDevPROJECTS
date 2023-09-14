@@ -1,13 +1,13 @@
 
 /* endangeredAnimals.css */
 h1 {
-    background-image: url('leaf_background.jpg'); /* Replace 'leaf_background.jpg' with the actual filename of your image */
-    background-size: cover; /* Adjust the background-size property as needed */
-    background-position: top; /* Adjust the background-position property as needed */
-    height: 90px; /* Adjust the height of the header as needed */
-    color: rgb(77, 175, 31); /* Set text color for the header */
+    background-image: url('leaf_background.jpg'); 
+    background-size: cover; /*  background-size property as needed */
+    background-position: top; /*  background-position property as needed */
+    height: 90px; /* height of the header as needed */
+    color: rgb(34, 80, 12); /* color for the header */
     text-align: center; /* Center align the text in the header */
-    padding-top: 45px; /* Adjust the padding to vertically center the text in the header */
+    padding-top: 45px; /* padding to vertically center the text in the header */
     margin-top: auto;
     opacity: 1;
 }
@@ -49,11 +49,11 @@ p {
 }
 
 #map-container {
-    flex: 3; /* Set the map container to take up 3/4 of the available space */
+    flex: 3; /* map container to take up 3/4 of the available space */
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 20px; /* Add some spacing between the map container and the other containers */
+    margin-right: 20px; /* spacing between the map container and the other containers */
     position: relative;
     
 }
