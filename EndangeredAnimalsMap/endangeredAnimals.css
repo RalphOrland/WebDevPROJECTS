@@ -191,6 +191,57 @@ p {
     animation: blink 2s infinite; /* Adjust the duration as needed */
   }
   
+  #game-invitation {
+    background-color: #f7f7f7; /* Background color */
+    padding: 50px; /* Add some padding for spacing */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Center-align text */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    max-width: 600px; /* Limit the width of the content */
+    margin: 100px auto 0; /* Center the container horizontally */
+    background-image: url('forest_background.jpg'); /* Replace 'leaf_background.jpg' with the actual filename of your image */
+    background-size: cover; /* Adjust the background-size property as needed */
+    background-position: top; /* Adjust the background-position property as needed */
+    text-align: center; /* Center align the text in the header */
+    padding-top: 45px; /* Adjust the padding to vertically center the text in the header */
+    opacity: 1;
+}
+
+#game-invitation h2 {
+    color: #ffffff; /* Text color for headings */
+    font-size: 24px; /* Font size for headings */
+}
+
+#game-invitation p {
+    color: #ffffff; /* Text color for paragraphs */
+    font-size: 16px; /* Font size for paragraphs */
+}
+
+#game-invitation ul {
+    text-align: left; /* Align the list items to the left */
+    margin-left: 20px; /* Add some margin to the left of the list */
+}
+
+#game-invitation li {
+    color: #ffffff; /* Text color for list items */
+    font-size: 14px; /* Font size for list items */
+    margin-bottom: 10px; /* Spacing between list items */
+}
+
+
+.btn-primary {
+    background-color: #f0ec2f; /* Primary button color */
+    color: #0d2157; /* Text color for buttons */
+    padding: 10px 20px; /* Padding for buttons */
+    text-decoration: none; /* Remove underlines from links */
+    border-radius: 5px; /* Rounded corners for buttons */
+    display: inline-block; /* Make the button inline */
+}
+
+.btn-primary:hover {
+    background-color: #b5d32f; /* Hover color for buttons */
+}
+
 
 
 
