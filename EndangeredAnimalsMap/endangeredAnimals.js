@@ -41,6 +41,7 @@ var rhinoIcon = L.icon({
 
 var grauerGorillaIcon = L.icon({
     iconUrl: 'icons/grauerGorilla-icon.png', 
+    iconSize: [75, 60],
     iconAnchor: [35, 35],
     popupAnchor: [0, -35],
 });
@@ -61,6 +62,7 @@ var tigerIcon = L.icon({
 
 var whaleSharkIcon = L.icon({
     iconUrl: 'icons/whaleShark-icon.png',
+    iconSize: [120, 80],
     iconAnchor: [35, 35],
     popupAnchor: [0, -35],
 });
@@ -107,6 +109,7 @@ var countryIcon = L.icon({
         'Polar Bear' : polarBearIcon,
         'Amazon River Dolphin' : amazonRiverDolphinIcon,
         'Galapagos Penguin' : galapagosPenguinIcon,
+        
       };
 
 
@@ -340,7 +343,6 @@ endangeredAnimals.forEach(animal => {
         popupContent += '</ul>';
     }
 
-
 // Event listener for the marker mouseover event
 marker.on('mouseover', function () {
     // Calculate the new icon size (2x of the original size)
@@ -349,7 +351,7 @@ marker.on('mouseover', function () {
         'African Forest Elephant': [110, 110],
         'Amur Leopard': [90, 50],
         'Black Rhinoceros': [95, 60],
-        'Eastern Lowland Gorilla': [75, 55],
+        'Eastern Lowland Gorilla': [75, 60],
         'Giant Panda': [85, 60],
         'Tiger' : [95, 52.5],
         'Whale-Shark' : [120, 80],
@@ -382,7 +384,15 @@ marker.on('mouseover', function () {
 function clearPinsAndTooltips() {
     animalMarkers.clearLayers(); // Clear existing animal pins
     countryMarkers.clearLayers(); // Clear existing country pins
+
+    map.on('click', function () {
+        // Clear pins and tooltips when clicking anywhere on the map
+        clearPinsAndTooltips();
+        removeBlinkAnimation();
+    });
 }
+
+
 
 // Function to create a pin icon with the blinking animation class
 function createPinIcon(country) {
@@ -402,6 +412,7 @@ function removeBlinkAnimation() {
         layer.getElement().classList.remove('blink-animation');
     });
 }
+
 
 // Event listener for the marker mouseout event
 marker.on('mouseout', function () {
@@ -428,6 +439,7 @@ mouseoverTimer = setTimeout(function () {
 }, 200);
 
 });
+
 
 
     marker.on('click', function () {
@@ -463,6 +475,8 @@ mouseoverTimer = setTimeout(function () {
                 modal.style.display = 'none';
             }
         });
+
+        
     });
 }
 
