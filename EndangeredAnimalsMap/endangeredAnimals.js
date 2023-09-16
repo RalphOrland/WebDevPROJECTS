@@ -6,7 +6,7 @@ var map = L.map('map', {
     minZoom: 3,
     maxZoom: 4,
     maxBounds: bounds, // Set the maximum bounds for the map
-}).setView([32, 73], 3);
+}).setView([15, 30], 2);
 
 L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
     attribution: '<a href="https://stamen.com">Stamen</a>',
@@ -26,40 +26,65 @@ var elephantIcon = L.icon({
 
 // Custom icon for the leopard marker
 var leopardIcon = L.icon({
-    iconUrl: 'icons/leopard-icon.png', // path to leopard icon image
+    iconUrl: 'icons/leopard-icon.png', 
     iconSize: [90, 50],
     iconAnchor: [35, 35],
     popupAnchor: [0, -35],
 });
 
 var rhinoIcon = L.icon({
-    iconUrl: 'icons/blackRhino-icon.png', // path to leopard icon image
+    iconUrl: 'icons/blackRhino-icon.png', 
     iconSize: [85, 50],
     iconAnchor: [35, 35],
     popupAnchor: [0, -35],
 });
 
 var grauerGorillaIcon = L.icon({
-    iconUrl: 'icons/grauerGorilla-icon.png', // path to leopard icon image
-    iconSize: [72, 55],
+    iconUrl: 'icons/grauerGorilla-icon.png', 
     iconAnchor: [35, 35],
     popupAnchor: [0, -35],
 });
 
 var giantPandaIcon = L.icon({
-    iconUrl: 'icons/giantPanda-icon.png', // path to leopard icon image
+    iconUrl: 'icons/giantPanda-icon.png', 
     iconSize: [82, 60],
     iconAnchor: [35, 35],
     popupAnchor: [0, -35],
 });
 
 var tigerIcon = L.icon({
-    iconUrl: 'icons/tiger-icon.png', // path to leopard icon image
+    iconUrl: 'icons/tiger-icon.png', 
     iconSize: [95, 52.5],
     iconAnchor: [35, 35],
     popupAnchor: [0, -35],
 });
 
+var whaleSharkIcon = L.icon({
+    iconUrl: 'icons/whaleShark-icon.png',
+    iconAnchor: [35, 35],
+    popupAnchor: [0, -35],
+});
+
+var polarBearIcon = L.icon({
+    iconUrl: 'icons/polarBear-icon.png', 
+    iconSize: [85, 90],
+    iconAnchor: [35, 35],
+    popupAnchor: [0, -35],
+});
+
+var amazonRiverDolphinIcon = L.icon({
+    iconUrl: 'icons/amazonRiverDolphin-icon.png', 
+    iconSize: [110, 90],
+    iconAnchor: [35, 35],
+    popupAnchor: [0, -35],
+});
+
+var galapagosPenguinIcon = L.icon({
+    iconUrl: 'icons/galapagosPenguin-icon.png', 
+    iconSize: [90, 85],
+    iconAnchor: [35, 35],
+    popupAnchor: [0, -35],
+});
 
 // Custom icon for the country markers
 var countryIcon = L.icon({
@@ -70,16 +95,18 @@ var countryIcon = L.icon({
     zIndex: 1,
 });
 
-
       // Create an object to map animal names to their icons
       const animalIcons = {
         'African Forest Elephant': elephantIcon,
         'Amur Leopard': leopardIcon,
         'Black Rhinoceros': rhinoIcon,
         'Eastern Lowland Gorilla' : grauerGorillaIcon,   
-        'Giant Panda' : giantPandaIcon,
+        'Giant Panda': giantPandaIcon,
         'Tiger': tigerIcon,
-        
+        'Whale-Shark': whaleSharkIcon,
+        'Polar Bear' : polarBearIcon,
+        'Amazon River Dolphin' : amazonRiverDolphinIcon,
+        'Galapagos Penguin' : galapagosPenguinIcon,
       };
 
 
@@ -108,7 +135,7 @@ var endangeredAnimals = [
         latlng: [45.75, 127.5], // Replace these coordinates with the actual coordinates of the Amur Leopard
         status: 'Critically Endangered',
         population: 'More than 84 individuals',
-        scientificName: '_Panthera pardus orientalis_',
+        scientificName: '<i>Panthera pardus orientalis</i>',
         weight: '70 - 105 pounds',
         habitats: 'Temperate, Broadleaf, and Mixed Forests',
         countries: ['Russia', 'China', 'North Korea'], // Add the countries where the animal lives
@@ -122,7 +149,7 @@ var endangeredAnimals = [
         latlng: [5.30, 30.82], 
         status: 'Critically Endangered',
         population: 'More than 6,000',
-        scientificName: '_Diceros bicornis_',
+        scientificName: '<i>Diceros bicornis</i>',
         weight: '1,760 -3,080 pounds',
         habitats: 'Temperate, Broadleaf, and Mixed Forests',
         countries: ['Kenya', 'Tanzania', 'Namibia', 'South Africa', 'Zimbabwe'],  // Add the countries where the animal lives
@@ -136,13 +163,13 @@ var endangeredAnimals = [
         latlng: [-4.2, 15], 
         status: 'Critically Endangered',
         population: 'Unknown',
-        scientificName: '_Gorilla beringei graueri_',
+        scientificName: '<i>Gorilla beringei graueri</i>',
         height: '4 to 5 ½ feet tall when standing on two feet',
         weight: 'Up to 440 pounds',
         habitats: 'Tropical and Subtropical Moist Broadleaf Forests',
         countries: ['Republic of Congo'],
         description:
-            'To learn more about these incredible gorillas, visit: <a href="https://www.worldwildlife.org/species/eastern-lowland-gorilla" style="color: #8adf82"; target="_blank">https://www.worldwildlife.org/species/eastern-lowland-gorilla</a>',
+            'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/eastern-lowland-gorilla" style="color: #8adf82"; target="_blank">https://www.worldwildlife.org/species/eastern-lowland-gorilla</a>',
         image: 'animalImages/grauers_gorilla.png',
     },
 
@@ -151,7 +178,7 @@ var endangeredAnimals = [
         latlng: [30.5928, 101.9019], // Replace with the actual coordinates of the Giant Panda
         status: 'Vulnerable',
         population: '1,864 in the wild',
-        scientificName: '_Ailuropoda melanoleuca_',
+        scientificName: '<i>Ailuropoda melanoleuca</i>',
         height: 'Adults can grow to more than four feet.',
         weight: '220-330 pounds',
         habitats: 'Temperate broadleaf and mixed forests of southwest China',
@@ -166,7 +193,7 @@ var endangeredAnimals = [
         latlng: [12.6392, 77.0], // Replace with the actual coordinates of the Tiger
         status: 'Endangered',
         population: 'About 4,500',
-        scientificName: '_Panthera tigris_',
+        scientificName: '<i>Panthera tigris</i>',
         weight: '220-660 pounds',
         length: '6-10 feet',
         habitats: 'Tropical rainforests, evergreen forests, temperate forests, mangrove swamps, grasslands, and savannas',
@@ -174,11 +201,71 @@ var endangeredAnimals = [
         description:
             'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/tiger" style="color: #8adf82" target="_blank">https://www.worldwildlife.org/species/tiger</a>',
         image: 'animalImages/tiger.png' // Add the image URL here
-    }
+    },
+
+    {
+        name: 'Whale-Shark',
+        latlng: [12.8797, 121.7740],
+        status: 'Endangered',
+        scientificName: '<i>Rhincodon typus</i>',
+        weight: 'Around 11 tons',
+        length: 'Around 40 feet',
+        habitats: 'Oceans',
+        countries: ['Australia', 'India', 'Maldives', 'South Africa', 'Belize', 'Mexico', 'Galapagos Islands', 'Indonesia', 'Thailand', 'Philippines'],
+        description:
+        'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/whale-shark" style="color: #8adf82" target="_blank">https://www.worldwildlife.org/species/whale-shark</a>',
+        image: 'animalImages/whale_shark.png' // Add the image URL here
+    },
     
+    
+    {
+
+        name: 'Polar Bear',
+        latlng: [71.7069, -42.6043],
+        status: 'Vulnerable',
+        population: '22,000-31,000',
+        scientificName: '<i>Ursus maritimus</i>',
+        weight: '800-1,300 pounds (males), 300-700 (females)',
+        length: '6-9 feet',
+        habitats: 'Arctic Ocean, sea ice, and adjacent coastal areas',
+        countries: ['Canada', 'Norway', 'Greenland (Denmark)', 'Russia', 'United States (Alaska)'],
+        description:
+        'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/polar-bear" style="color: #8adf82" target="_blank">https://www.worldwildlife.org/species/polar-bear</a>',
+        image: 'animalImages/polar_bear.png'
+    }, 
+
+
+    {
+        name: 'Amazon River Dolphin',
+        latlng: [3.4653, -59.4785],
+        scientificName: '<i>Inia geoffrensis</i>',
+        status: 'Vulnerable',
+        weight: 'Up to 352 pounds',
+        length: 'Up to 9.2 feet',
+        habitats: 'Rivers and Lakes',
+        countries: ['Brazil', 'Bolivia', 'Peru', 'Ecuador', 'Colombia', 'Venezuela'],
+        description: 'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/amazon-river-dolphin" style="color: #8adf82" target="_blank">https://www.worldwildlife.org/species/amazon-river-dolphin</a>',
+        image: 'animalImages/amazon_river_dolphin.png' // Add the image URL here
+    },
+
+
+    {
+        name: 'Galapagos Penguin',
+        latlng: [-0.8324, -91.1353],
+        status: 'Endangered',
+        population: 'fewer than 2000',
+        scientificName: '<i>Spheniscus mendiculus</i>',
+        countries: ['Ecuador', 'Galapagos Islands'],
+        weight: '5.5 pounds',
+        length: '19 inches long',
+        habitats: 'Oceans',
+        description: 'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/galapagos-penguin" style="color: #8adf82" target="_blank">https://www.worldwildlife.org/species/galapagos-penguin</a>',
+        image: 'animalImages/galapagos_penguin.png'
+    },
     
     //  animals here...
 ];
+
 
 // Function to get the center of a country based on its name
 function getCountryCenter(country) {
@@ -198,8 +285,27 @@ function getCountryCenter(country) {
         'India': [28.6139, 77.2090],
         'Bangladesh': [23.8103, 90.4125],
         'Nepal': [27.7172, 85.3240],
-        'Bhutan': [27.4728, 89.6390]
-        // Add more countries and their center coordinates as needed
+        'Bhutan': [27.4728, 89.6390],
+        'Australia': [-25.2744, 133.7751], 
+        'Maldives': [3.2028, 73.2207], 
+        'Belize': [17.1899, -88.4976], 
+        'Mexico': [23.6345, -102.5528],
+        'Galapagos Islands': [-0.8324, -91.1353], 
+        'Indonesia': [-2.2170, 120.9405], 
+        'Thailand': [15.8700, 100.9925], 
+        'Philippines': [12.8797, 121.7740],
+        'Canada' : [56.1304, -106.3468],
+        'Norway' : [60.4720, 8.4689],
+        'Greenland (Denmark)' : [71.7069, -42.6043],
+        'United States (Alaska)' : [64.2008, -149.4937],
+        'Brazil': [-3.4653, -59.4785],  
+        'Bolivia': [-16.5000, -64.0000], 
+        'Peru': [-9.1900, -75.0152],  
+        'Ecuador': [-1.8312, -78.1834],  
+        'Colombia': [4.5709, -74.2973],  
+        'Venezuela': [6.4238, -66.5897],  
+        
+
     };
     return countryCenters[country];
 }
@@ -244,8 +350,12 @@ marker.on('mouseover', function () {
         'Amur Leopard': [90, 50],
         'Black Rhinoceros': [95, 60],
         'Eastern Lowland Gorilla': [75, 55],
-        'Giant Panda': [85,60],
+        'Giant Panda': [85, 60],
         'Tiger' : [95, 52.5],
+        'Whale-Shark' : [120, 80],
+        'Polar Bear' : [88, 90],
+        'Amazon River Dolphin' : [110, 80],
+        'Galapagos Penguin' : [90, 85],
     };
     
     
@@ -333,6 +443,7 @@ mouseoverTimer = setTimeout(function () {
         <div id="animal-status" style="color: red; font-weight: bold;">${animal.status}</div>
         <div class="animal-detail" style="color: white;"><span style="font-weight: bold; font-size: 16px;">Height:</span> ${animal.height}</div>
         <div class="animal-detail" style="color: white;"><span style="font-weight: bold; font-size: 16px;">Weight:</span> ${animal.weight}</div>
+        <div class="animal-detail" style="color: white;"><span style="font-weight: bold; font-size: 16px;">Scientific Name:</span> ${animal.scientificName}</div>
         <div class="animal-detail" style="color: white;"><span style="font-weight: bold; font-size: 16px;">Habitats:</span> ${animal.habitats}</div>
         <div class="animal-detail" style="color: white;"><span style="font-weight: bold; font-size: 16px;">Countries:</span> ${animal.countries.join(', ')}</div>
         <br/>
