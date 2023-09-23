@@ -4,26 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animal Sound Matching Game</title>
+    <link rel="stylesheet" href="animalsoundsGame.css" />
     <!-- Add CSS and JavaScript references here -->
 </head>
 <body>
     <h1>Animal Sound Matching Game</h1>
-    <div id="game-container">
-        <!-- Game elements go here -->
-        <audio id="animal-sound" controls autoplay>
-            <source src="sound1.mp3" type="audio/mpeg">
-            <!-- Add more audio sources for different sounds -->
-        </audio>
-        <div id="options">
-            <!-- Display options for users to select the correct animal -->
-            <button id="option1">Animal 1</button>
-            <button id="option2">Animal 2</button>
-            <!-- Add more options as needed -->
+
+    <!-- Difficulty Selection Section -->
+    <div id="difficulty-selection">
+        <h2>Select Difficulty</h2>
+        <div id="difficulty-buttons">
+            <a href="index.html" class="btn btn-primary">Go Back to Map</a>
+            <a href="game-easy.html" class="btn btn-difficulty">Easy</a>
+            <a href="game-medium.html" class="btn btn-difficulty">Medium</a>
+            <a href="game-hard.html" class="btn btn-difficulty">Hard</a>
         </div>
-        <p>Score: <span id="score">0</span></p>
-        <button id="start-game">Start Game</button>
     </div>
-    <!-- Include JavaScript file for game logic -->
-    <script src="animalsoundsGame.js"></script>
+
+    <!-- Include JavaScript file for handling difficulty selection -->
+    <script src="difficultySelection.js"></script>
 </body>
 </html>
