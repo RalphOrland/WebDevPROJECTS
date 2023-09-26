@@ -6,12 +6,19 @@ const animals = [
         options: ['Animal 1', 'Animal 2'],
         correctOption: 'Animal 1'
     },
+
+    {
+        animalName: 'Amazon River Dolphin',
+        mp3FileName: 'amazon_river_dolphin.mp3',
+        options: ['Animal 1', 'Animal 2'],
+        correctOption: 'Animal 1'
+    },
     // Add more objects for other animals and options
 ];
 
 let currentSoundIndex = 0;
 let score = 0;
-const audio = new Audio();
+const audio = document.getElementById('animal-sound'); // Get the single audio element
 
 function initializeGame() {
     // Load the first sound
@@ -28,6 +35,7 @@ function loadSound(index) {
     const animal = animals[index];
     const mp3Path = 'animalSounds/' + animal.mp3FileName;
     audio.src = mp3Path;
+    audio.currentTime = 0; // Reset audio playback position to the beginning
 
     // Display options on the page, randomizing their order
     const optionButtons = document.querySelectorAll('.btn-option');
@@ -41,12 +49,7 @@ function handleOptionClick(event) {
     const selectedOption = event.target.textContent;
     const currentAnimal = animals[currentSoundIndex];
 
-    if (selectedOption === currentAnimal.correctOption) {
-        // Correct answer, increase score
-        score++;
-    }
-
-    // Load the next sound
+    // Load the next sound immediately
     currentSoundIndex++;
 
     if (currentSoundIndex < animals.length) {
@@ -54,6 +57,15 @@ function handleOptionClick(event) {
     } else {
         // All sounds have been played, end the game
         endGame();
+    }
+
+    if (selectedOption === currentAnimal.correctOption) {
+        // Correct answer, increase score
+        score++;
+
+        // Update the score on the page
+        const scoreElement = document.getElementById('score');
+        scoreElement.textContent = `Score: ${score}`;
     }
 }
 
@@ -82,6 +94,4 @@ function shuffleArray(array) {
     return shuffledArray;
 }
 
-
 window.addEventListener('load', initializeGame);
-
