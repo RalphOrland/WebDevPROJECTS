@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Sound Matching Game - Easy</title>
+    <link rel="stylesheet" href="game.css" />
+
+    <!-- Add CSS and JavaScript references here -->
+</head>
+<body>
+    <h1>Animal Sound Matching Game - Easy</h1>
+
+    
+    <audio id="animal-sound" controls autoplay>
+        <source src="animalSounds/african_forest_elephant.mp3" type="audio/mp3">
+        <source src="animalSounds/amur_leopard.mp3" type="audio/mp3">
+        <!-- Add more source elements for other animal sounds -->
+    </audio>
+
+    <div id="options">
+        <button class="btn-option">Option 1</button>
+        <button class="btn-option">Option 2</button>
+
+        
+        <!-- Add more options as needed -->
+    </div>
+
+    <p>Score: <span id="score">0</span></p>
+
+    <!-- Include JavaScript file for handling the game logic -->
+    <script src="game-easy.js"></script>
+</body>
+</html>
