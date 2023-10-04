@@ -19,6 +19,9 @@ const animals = [
 let currentSoundIndex = 0;
 let score = 0;
 const audio = document.getElementById('animal-sound'); // Get the single audio element
+const nextButton = document.getElementById('next-button');
+
+
 
 function initializeGame() {
     // Load the first sound
@@ -29,7 +32,26 @@ function initializeGame() {
     optionButtons.forEach(button => {
         button.addEventListener('click', handleOptionClick);
     });
+
+    // Add event listeners to the "Previous" and "Next" buttons
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+
+    prevButton.addEventListener('click', handlePrevButtonClick);
+    nextButton.addEventListener('click', handleNextButtonClick);
+
+    // Initially hide the "Previous" button
+    if (currentSoundIndex === 0) {
+        prevButton.style.display = 'none';
+    }
+
+    // Optionally hide the "Next" button for the last animal
+    // Adjust as needed based on your requirements
+    if (currentSoundIndex === animals.length - 1) {
+        nextButton.style.display = 'none';
+    }
 }
+
 
 function loadSound(index) {
     const animal = animals[index];
@@ -46,26 +68,75 @@ function loadSound(index) {
 }
 
 function handleOptionClick(event) {
+    // Check if the user has already clicked an option for the current animal
+    if (currentSoundIndex >= animals.length) {
+        return;
+    }
+
     const selectedOption = event.target.textContent;
     const currentAnimal = animals[currentSoundIndex];
 
-    // Load the next sound immediately
+    if (selectedOption === currentAnimal.correctOption) {
+        // Correct answer, increase score only if the user hasn't clicked an option for this animal before
+        if (!currentAnimal.clicked) {
+            // Update the score on the page
+            score++;
+            const scoreElement = document.getElementById('score');
+            scoreElement.textContent = `Score: ${score}`;
+        }
+
+        // Mark the current animal as clicked
+        currentAnimal.clicked = true;
+    }
+}
+
+
+function handleNextButtonClick() {
+    // Load the next sound when the "Next" button is clicked
     currentSoundIndex++;
 
+    // Show or hide the "Previous" and "Next" buttons based on the index
+    updateButtonVisibility();
+    
     if (currentSoundIndex < animals.length) {
         loadSound(currentSoundIndex);
     } else {
         // All sounds have been played, end the game
         endGame();
     }
+}
 
-    if (selectedOption === currentAnimal.correctOption) {
-        // Correct answer, increase score
-        score++;
+function handlePrevButtonClick() {
+    // Load the previous sound when the "Previous" button is clicked
+    currentSoundIndex--;
 
-        // Update the score on the page
-        const scoreElement = document.getElementById('score');
-        scoreElement.textContent = `Score: ${score}`;
+    // Show or hide the "Previous" and "Next" buttons based on the index
+    updateButtonVisibility();
+    
+    if (currentSoundIndex >= 0) {
+        loadSound(currentSoundIndex);
+    } else {
+        // If at the first animal, do nothing or handle it as you wish
+    }
+}
+
+function updateButtonVisibility() {
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+
+    // Show or hide the "Previous" button based on the index
+    if (currentSoundIndex === 0) {
+        prevButton.style.display = 'none';
+    } else {
+        prevButton.style.display = 'inline-block'; // or 'block' based on your styling
+    }
+
+    // Optionally show or hide the "Next" button for the last animal
+    // Adjust as needed based on your requirements
+    if (currentSoundIndex === animals.length - 1) {
+        nextButton.style.display = 'none';
+    } else {
+        nextButton.style.display = 'inline-block'; // or 'block' based on your styling
     }
 }
 
