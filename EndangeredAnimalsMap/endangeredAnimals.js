@@ -8,13 +8,14 @@ var map = L.map('map', {
     maxBounds: bounds, // Set the maximum bounds for the map
 }).setView([15, 30], 2);
 
-L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-    attribution: '<a href="https://stamen.com">Stamen</a>',
-    subdomains: 'abcd',
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    subdomains: ['a', 'b', 'c', 'd'],
     minZoom: 1,
     maxZoom: 16,
-    ext: 'jpg'
+    ext: 'png'
 }).addTo(map);
+
 
 // Custom icon for the elephant marker
 var elephantIcon = L.icon({
