@@ -4,7 +4,8 @@ const animals = [
         animalName: 'African Forest Elephant',
         mp3FileName: 'african_forest_elephant.mp3',
         options: ['Animal 1', 'Animal 2'],
-        correctOption: 'Animal 1'
+        correctOption: 'Animal 1',
+        imagePath:'../animalImages/african_forest_elephant.png',
     },
 
     {
@@ -24,6 +25,11 @@ const nextButton = document.getElementById('next-button');
 
 
 function initializeGame() {
+    // Initialize the "clicked" property for each animal
+    animals.forEach(animal => {
+        animal.clicked = false;
+    });
+
     // Load the first sound
     loadSound(currentSoundIndex);
 
@@ -53,19 +59,36 @@ function initializeGame() {
 }
 
 
+
 function loadSound(index) {
     const animal = animals[index];
     const mp3Path = 'animalSounds/' + animal.mp3FileName;
     audio.src = mp3Path;
-    audio.currentTime = 0; // Reset audio playback position to the beginning
+    audio.currentTime = 0;
 
     // Display options on the page, randomizing their order
     const optionButtons = document.querySelectorAll('.btn-option');
     const shuffledOptions = shuffleArray(animal.options);
+
     optionButtons.forEach((button, i) => {
-        button.textContent = shuffledOptions[i];
+        // Hide the text content of all buttons
+        button.textContent = '';
+
+        if (shuffledOptions[i] === animal.correctOption) {
+            // Create an image element for the correct option
+            const imgElement = document.createElement('img');
+            imgElement.src = animal.imagePath; // Set the image path dynamically
+            imgElement.alt = 'Animal Image';
+
+            // Append the image element to the button
+            button.appendChild(imgElement);
+        } else {
+            // For other options, display the text content
+            button.textContent = shuffledOptions[i];
+        }
     });
 }
+
 
 function handleOptionClick(event) {
     // Check if the user has already clicked an option for the current animal
@@ -73,10 +96,18 @@ function handleOptionClick(event) {
         return;
     }
 
-    const selectedOption = event.target.textContent;
+    const clickedElement = event.target;
     const currentAnimal = animals[currentSoundIndex];
 
-    if (selectedOption === currentAnimal.correctOption) {
+    // Check if the clicked element is the image or the button
+    const clickedButton = clickedElement.tagName.toLowerCase() === 'img'
+        ? clickedElement.parentElement  // If the image was clicked, get the parent button
+        : clickedElement;  // If the button was clicked, use it directly
+
+    // Check if the button has an image child
+    const hasImage = clickedButton.querySelector('img') !== null;
+
+    if (hasImage && currentAnimal.correctOption === 'Animal 1') {
         // Correct answer, increase score only if the user hasn't clicked an option for this animal before
         if (!currentAnimal.clicked) {
             // Update the score on the page
@@ -89,6 +120,7 @@ function handleOptionClick(event) {
         currentAnimal.clicked = true;
     }
 }
+
 
 
 function handleNextButtonClick() {
