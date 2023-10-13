@@ -1,3 +1,14 @@
+const prompt = document.getElementById('prompt');
+const promptText = document.getElementById('prompt-text');
+const promptClose = document.getElementById('prompt-close');
+const promptOverlay = document.getElementById('prompt-overlay');
+
+//  event listener for the close button
+promptClose.addEventListener('click', closePrompt);
+
+//  event listener for the overlay to close the prompt when clicked
+promptOverlay.addEventListener('click', closePrompt);
+
 
 const animals = [
     {
@@ -7,12 +18,19 @@ const animals = [
         correctOption: 'Animal 1',
         imagePath:'../animalImages/african_forest_elephant.png',
     },
-
     {
         animalName: 'Amazon River Dolphin',
         mp3FileName: 'amazon_river_dolphin.mp3',
         options: ['Animal 1', 'Animal 2'],
-        correctOption: 'Animal 1'
+        correctOption: 'Animal 1',
+        imagePath:'../animalImages/amazon_river_dolphin.png'
+    },
+    {
+        animalName: 'Amur Leopard',
+        mp3FileName: 'amur_leopard.mp3',
+        options: ['Animal 1', 'Animal 2'],
+        correctOption: 'Animal 1',
+        imagePath:'../animalImages/amur_leopard.png'
     },
     // Add more objects for other animals and options
 ];
@@ -22,7 +40,16 @@ let score = 0;
 const audio = document.getElementById('animal-sound'); // Get the single audio element
 const nextButton = document.getElementById('next-button');
 
+// Array containing paths to animal images
+const animalImages = [
+    '../animalImages/african_forest_elephant.png',
+    '../animalImages/amazon_river_dolphin.png',
+    '../animalImages/amur_leopard.png',
+    '../animalImages/black_rhino.png',
+    
 
+    // animals image path
+];
 
 function initializeGame() {
     // Initialize the "clicked" property for each animal
@@ -58,8 +85,6 @@ function initializeGame() {
     }
 }
 
-
-
 function loadSound(index) {
     const animal = animals[index];
     const mp3Path = 'animalSounds/' + animal.mp3FileName;
@@ -82,12 +107,33 @@ function loadSound(index) {
 
             // Append the image element to the button
             button.appendChild(imgElement);
+
+            // Set the data-correct attribute based on whether it's the correct option
+            button.setAttribute('data-correct', 'true');
         } else {
-            // For other options, display the text content
-            button.textContent = shuffledOptions[i];
+            // For other options, display a random animal image
+            const randomImage = getRandomAnimalImage(animal.imagePath);
+            const imgElement = document.createElement('img');
+            imgElement.src = randomImage;
+            imgElement.alt = 'Animal Image';
+
+            // Append the image element to the button
+            button.appendChild(imgElement);
+
+            // Set the data-correct attribute to false for incorrect options
+            button.setAttribute('data-correct', 'false');
         }
     });
 }
+
+function getRandomAnimalImage(excludeImagePath) {
+    // Get a random image path excluding the provided one
+    const filteredImages = animalImages.filter(image => image !== excludeImagePath);
+    const randomIndex = Math.floor(Math.random() * filteredImages.length);
+    return filteredImages[randomIndex];
+}
+
+
 
 
 function handleOptionClick(event) {
@@ -96,32 +142,57 @@ function handleOptionClick(event) {
         return;
     }
 
-    const clickedElement = event.target;
-    const currentAnimal = animals[currentSoundIndex];
+    const clickedButton = event.target.closest('.btn-option');
+    const prompt = document.getElementById('prompt');
+    const promptText = document.getElementById('prompt-text');
 
-    // Check if the clicked element is the image or the button
-    const clickedButton = clickedElement.tagName.toLowerCase() === 'img'
-        ? clickedElement.parentElement  // If the image was clicked, get the parent button
-        : clickedElement;  // If the button was clicked, use it directly
+    if (clickedButton) {
+        const isCorrectOption = clickedButton.getAttribute('data-correct') === 'true';
 
-    // Check if the button has an image child
-    const hasImage = clickedButton.querySelector('img') !== null;
+        // Show a prompt based on whether the option is correct or not
+        if (isCorrectOption) {
+            if (!animals[currentSoundIndex].clicked) {
+                score++;
+                const scoreElement = document.getElementById('score');
+                scoreElement.textContent = `Score: ${score}`;
 
-    if (hasImage && currentAnimal.correctOption === 'Animal 1') {
-        // Correct answer, increase score only if the user hasn't clicked an option for this animal before
-        if (!currentAnimal.clicked) {
-            // Update the score on the page
-            score++;
-            const scoreElement = document.getElementById('score');
-            scoreElement.textContent = `Score: ${score}`;
+                // Set the prompt text and display the prompt
+                promptText.textContent = 'Correct! Well done!';
+                prompt.style.display = 'block';
+            }
+            animals[currentSoundIndex].clicked = true;
+        } else {
+            // Set the prompt text and display the prompt
+            promptText.textContent = 'Oops! That\'s not correct. Try again!';
+            prompt.style.display = 'block';
         }
-
-        // Mark the current animal as clicked
-        currentAnimal.clicked = true;
     }
 }
 
 
+    function showPrompt(message) {
+        const promptElement = document.getElementById('prompt');
+        promptElement.textContent = message;
+        promptElement.style.display = 'block';
+    
+        // Add a click event listener to the document to hide the prompt on background click
+        document.addEventListener('click', hidePrompt);
+    }
+    
+    // Function to hide the prompt
+    function hidePrompt() {
+        const promptElement = document.getElementById('prompt');
+        promptElement.style.display = 'none';
+    
+        // Remove the click event listener after hiding the prompt
+        document.removeEventListener('click', hidePrompt);
+
+
+}
+    
+function closePrompt() {
+    prompt.style.display = 'none';
+}
 
 function handleNextButtonClick() {
     // Load the next sound when the "Next" button is clicked
@@ -129,7 +200,7 @@ function handleNextButtonClick() {
 
     // Show or hide the "Previous" and "Next" buttons based on the index
     updateButtonVisibility();
-    
+
     if (currentSoundIndex < animals.length) {
         loadSound(currentSoundIndex);
     } else {
@@ -144,7 +215,7 @@ function handlePrevButtonClick() {
 
     // Show or hide the "Previous" and "Next" buttons based on the index
     updateButtonVisibility();
-    
+
     if (currentSoundIndex >= 0) {
         loadSound(currentSoundIndex);
     } else {
@@ -195,6 +266,13 @@ function shuffleArray(array) {
         [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
     }
     return shuffledArray;
+}
+
+// Function to get a random animal image excluding the correct answer
+function getRandomAnimalImage(correctImagePath) {
+    const availableImages = animalImages.filter(image => image !== correctImagePath);
+    const randomIndex = Math.floor(Math.random() * availableImages.length);
+    return availableImages[randomIndex];
 }
 
 window.addEventListener('load', initializeGame);

@@ -9,26 +9,43 @@
     <!-- Add CSS and JavaScript references here -->
 </head>
 <body>
-    <h1>Animal Sound Matching Game - Easy</h1>
 
-    <audio id="animal-sound" controls autoplay>
-        <!-- Audio source will be loaded by JavaScript -->
-    </audio>
     
-
-    <!-- Add more audio elements for other animal sounds -->
-
-    <div id="options">
-        <button class="btn-option">Option 1</button>
-        <button class="btn-option">Option 2</button>
-        <!-- Add more options as needed -->
+    <div id="prompt" class="prompt">
+        <p id="prompt-text"></p>
+        <button id="prompt-close">Close</button>
+        <div id="prompt-overlay"></div>
     </div>
 
-     <!-- "Next" and "Previous" button -->
-     <button id="next-button">Next</button>
-     <button id="prev-button">Previous</button>
 
-    <p>Score: <span id="score">0</span></p>
+    <div class="container">
+        <div id="game-container">
+            <h1>Animal Sound Matching Game - Easy</h1>
+
+            <audio id="animal-sound" controls autoplay>
+                <!-- Audio source will be loaded by JavaScript -->
+            </audio>
+
+            <!-- Add more audio elements for other animal sounds -->
+
+            <div id="options">
+                <button class="btn-option">Option 1</button>
+                <button class="btn-option">Option 2</button>
+                <!-- Add more options as needed -->
+            </div>
+
+            <!-- "Next" and "Previous" button -->
+            <div id="buttons-container">
+                <button id="next-button">Next</button>
+                <button id="prev-button">Previous</button>
+            </div>
+
+            <p>Score: <span id="score">0</span></p>
+
+            
+        </div>
+    </div>
+    
 
     <!-- Include JavaScript file for handling the game logic -->
     <script src="game-easy.js"></script>
