@@ -1,13 +1,41 @@
-const prompt = document.getElementById('prompt');
-const promptText = document.getElementById('prompt-text');
-const promptClose = document.getElementById('prompt-close');
-const promptOverlay = document.getElementById('prompt-overlay');
+const promptNext = document.getElementById('prompt-next');
+promptNext.addEventListener('click', handlePromptNextClick);
 
-//  event listener for the close button
-promptClose.addEventListener('click', closePrompt);
+// Remove the existing closePrompt function
+// Add the showPrompt function that takes a message and a flag indicating if it's the last question
+function showPrompt(message, isLastQuestion) {
+    const promptElement = document.getElementById('prompt');
+    const promptText = document.getElementById('prompt-text');
+    const promptNext = document.getElementById('prompt-next');
 
-//  event listener for the overlay to close the prompt when clicked
-promptOverlay.addEventListener('click', closePrompt);
+    // Set the prompt text
+    promptText.textContent = message;
+
+    // If it's the last question, update the next button text
+    if (isLastQuestion) {
+        promptNext.textContent = 'Finish';
+    } else {
+        promptNext.textContent = 'Next';
+    }
+
+    // Display the prompt
+    promptElement.style.display = 'block';
+
+    // Add a click event listener to the document to hide the prompt on background click
+    document.addEventListener('click', hidePrompt);
+}
+
+// Add the handlePromptNextClick function to handle the 'next' button click
+function handlePromptNextClick() {
+    const promptElement = document.getElementById('prompt');
+    promptElement.style.display = 'none';
+
+    // Remove the click event listener after hiding the prompt
+    document.removeEventListener('click', hidePrompt);
+
+    // Handle the logic for going to the next question or finishing the game
+    handleNextButtonClick(); // You can replace this with your logic
+}
 
 
 const animals = [
@@ -32,7 +60,14 @@ const animals = [
         correctOption: 'Animal 1',
         imagePath:'../animalImages/amur_leopard.png'
     },
-    // Add more objects for other animals and options
+    {
+        animalName: 'Black Rhino',
+        mp3FileName: 'black_rhino.mp3',
+        options: ['Animal 1', 'Animal 2'],
+        correctOption: 'Animal 1',
+        imagePath:'../animalImages/black_rhino.png'
+    },
+    //objects for other animals and options
 ];
 
 let currentSoundIndex = 0;
@@ -70,17 +105,10 @@ function initializeGame() {
         button.addEventListener('click', handleOptionClick);
     });
 
-    // Add event listeners to the "Previous" and "Next" buttons
-    const prevButton = document.getElementById('prev-button');
+    // Add event listeners to  "Next" buttons
     const nextButton = document.getElementById('next-button');
 
-    prevButton.addEventListener('click', handlePrevButtonClick);
     nextButton.addEventListener('click', handleNextButtonClick);
-
-    // Initially hide the "Previous" button
-    if (currentSoundIndex === 0) {
-        prevButton.style.display = 'none';
-    }
 
     // Optionally hide the "Next" button for the last animal
     // Adjust as needed based on your requirements
@@ -179,19 +207,12 @@ function capitalizeFirstLetter(string) {
 }
 
 
-
-
-
-
 function getRandomAnimalImage(excludeImagePath) {
     // Get a random image path excluding the provided one
     const filteredImages = animalImages.filter(image => image !== excludeImagePath);
     const randomIndex = Math.floor(Math.random() * filteredImages.length);
     return filteredImages[randomIndex];
 }
-
-
-
 
 function handleOptionClick(event) {
     // Check if the user has already clicked an option for the current animal
@@ -220,7 +241,7 @@ function handleOptionClick(event) {
             animals[currentSoundIndex].clicked = true;
         } else {
             // Set the prompt text and display the prompt
-            promptText.textContent = 'Oops! That\'s not correct. Try again!';
+            promptText.textContent = 'Oops! That\'s not correct.';
             prompt.style.display = 'block';
         }
     }
@@ -267,30 +288,9 @@ function handleNextButtonClick() {
     }
 }
 
-function handlePrevButtonClick() {
-    // Load the previous sound when the "Previous" button is clicked
-    currentSoundIndex--;
-
-    // Show or hide the "Previous" and "Next" buttons based on the index
-    updateButtonVisibility();
-
-    if (currentSoundIndex >= 0) {
-        loadSound(currentSoundIndex);
-    } else {
-        // If at the first animal, do nothing or handle it as you wish
-    }
-}
 
 function updateButtonVisibility() {
-    const prevButton = document.getElementById('prev-button');
-    const nextButton = document.getElementById('next-button');
-
-    // Show or hide the "Previous" button based on the index
-    if (currentSoundIndex === 0) {
-        prevButton.style.display = 'none';
-    } else {
-        prevButton.style.display = 'inline-block'; // or 'block' based on your styling
-    }
+      const nextButton = document.getElementById('next-button');
 
     // Optionally show or hide the "Next" button for the last animal
     // Adjust as needed based on your requirements
