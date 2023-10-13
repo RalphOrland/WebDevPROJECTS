@@ -46,8 +46,12 @@ const animalImages = [
     '../animalImages/amazon_river_dolphin.png',
     '../animalImages/amur_leopard.png',
     '../animalImages/black_rhino.png',
-    
-
+    '../animalImages/galapagos_penguin.png',
+    '../animalImages/giant_panda.png',    
+    "../animalImages/grauer's_gorilla.png",
+    '../animalImages/polar_bear.png',
+    '../animalImages/tiger.png',
+    '../animalImages/whale_shark.png',
     // animals image path
 ];
 
@@ -92,12 +96,16 @@ function loadSound(index) {
     audio.currentTime = 0;
 
     // Display options on the page, randomizing their order
-    const optionButtons = document.querySelectorAll('.btn-option');
+    const optionContainers = document.querySelectorAll('.option-container');
     const shuffledOptions = shuffleArray(animal.options);
 
-    optionButtons.forEach((button, i) => {
-        // Hide the text content of all buttons
+    optionContainers.forEach((container, i) => {
+        const button = container.querySelector('.btn-option');
+        const animalName = container.querySelector('.animal-name');
+
+        // Hide the text content of the button and animal name
         button.textContent = '';
+        animalName.textContent = '';
 
         if (shuffledOptions[i] === animal.correctOption) {
             // Create an image element for the correct option
@@ -110,8 +118,14 @@ function loadSound(index) {
 
             // Set the data-correct attribute based on whether it's the correct option
             button.setAttribute('data-correct', 'true');
+
+            // Extract the animal name from the image file name
+            const nameFromImage = extractAnimalName(animal.imagePath);
+
+            // Display the correct animal name below the option image
+            animalName.textContent = capitalizeFirstLetter(nameFromImage);
         } else {
-            // For other options, display a random animal image
+            // For other options, display a random animal image and name
             const randomImage = getRandomAnimalImage(animal.imagePath);
             const imgElement = document.createElement('img');
             imgElement.src = randomImage;
@@ -122,9 +136,52 @@ function loadSound(index) {
 
             // Set the data-correct attribute to false for incorrect options
             button.setAttribute('data-correct', 'false');
+
+            // Extract the animal name from the random image file name
+            const nameFromImage = extractAnimalName(randomImage);
+
+            // Display the random animal name below the option image
+            animalName.textContent = capitalizeFirstLetter(nameFromImage);
         }
     });
 }
+
+// Function to extract the animal name from the image file name
+function extractAnimalName(imagePath) {
+    const fileName = imagePath.split('/').pop(); // Get the file name from the path
+    const nameWithoutExtension = fileName.split('.')[0]; // Remove the file extension
+    const nameWithSpaces = nameWithoutExtension.replace(/_/g, ' '); // Replace underscores with spaces
+    return nameWithSpaces;
+}
+
+function capitalizeFirstLetter(string) {
+    // Replace underscores with spaces
+    const stringWithSpaces = string.replace(/_/g, ' ');
+
+    // Capitalize the first letter of each word
+    const stringWithCapitals = stringWithSpaces.replace(/\b\w/g, c => c.toUpperCase());
+
+    // Find the position of the apostrophe
+    const apostropheIndex = stringWithCapitals.indexOf("'");
+
+    // Check if an apostrophe is found and if it's not the last character in the string
+    if (apostropheIndex !== -1 && apostropheIndex !== stringWithCapitals.length - 1) {
+        // Replace the 's' after the apostrophe with a lowercase 's'
+        const stringWithApostropheLowercased =
+            stringWithCapitals.substring(0, apostropheIndex + 1) +
+            's' +
+            stringWithCapitals.slice(apostropheIndex + 2);
+
+        return stringWithApostropheLowercased;
+    } else {
+        return stringWithCapitals;
+    }
+}
+
+
+
+
+
 
 function getRandomAnimalImage(excludeImagePath) {
     // Get a random image path excluding the provided one
@@ -190,6 +247,7 @@ function handleOptionClick(event) {
 
 }
     
+// Function to close the prompt
 function closePrompt() {
     prompt.style.display = 'none';
 }
