@@ -6,18 +6,19 @@
     <title>Animal Sound Matching Game - Easy</title>
     <link rel="stylesheet" href="game.css" />
 
-    <!-- Add CSS and JavaScript references here -->
+    <!-- Add CSS references here -->
 </head>
 <body>
 
-    
+    <div id="game-over-text" style="display: none;">Game Over!</div>
+    <button id="total-score-button" style="display: none;">Total Score</button>
+
+    <div id="prompt-overlay"></div>
+
     <div id="prompt" class="prompt">
         <p id="prompt-text" class="prompt-text"></p>
         <button id="prompt-next" class="prompt-button">Next</button>
-        <div id="prompt-overlay" class="prompt-overlay"></div>
     </div>
-    
-
 
     <div class="container">
         <div id="game-container">
@@ -29,7 +30,7 @@
 
             <!-- Add more audio elements for other animal sounds -->
 
-            <!-- "Next" and "Previous" button -->
+            <!-- Option containers -->
             <div id="options">
                 <div class="option-container">
                     <button class="btn-option"></button>
@@ -42,17 +43,16 @@
                 <!-- Add more option containers as needed -->
             </div>
 
+            <!-- Score display -->
             <p>Score: <span id="score">0</span></p>
             
-  <!-- "Next" and "Previous" button -->
+            <!-- Buttons container -->
             <div id="buttons-container">
                 <button id="next-button">Next</button>
             </div>
 
-            
         </div>
     </div>
-    
 
     <!-- Include JavaScript file for handling the game logic -->
     <script src="game-easy.js"></script>

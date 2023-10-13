@@ -1,21 +1,22 @@
 const promptNext = document.getElementById('prompt-next');
 promptNext.addEventListener('click', handlePromptNextClick);
 
-// Remove the existing closePrompt function
-// Add the showPrompt function that takes a message and a flag indicating if it's the last question
 function showPrompt(message, isLastQuestion) {
     const promptElement = document.getElementById('prompt');
     const promptText = document.getElementById('prompt-text');
     const promptNext = document.getElementById('prompt-next');
+    const totalScoreButton = document.getElementById('total-score-button'); // Add this line
 
     // Set the prompt text
     promptText.textContent = message;
 
-    // If it's the last question, update the next button text
+    // If it's the last question, update the next button text and show the "Total Score" button
     if (isLastQuestion) {
         promptNext.textContent = 'Finish';
+        totalScoreButton.style.display = 'inline-block'; // Add this line
     } else {
         promptNext.textContent = 'Next';
+        totalScoreButton.style.display = 'none'; // Add this line
     }
 
     // Display the prompt
@@ -25,7 +26,8 @@ function showPrompt(message, isLastQuestion) {
     document.addEventListener('click', hidePrompt);
 }
 
-// Add the handlePromptNextClick function to handle the 'next' button click
+
+
 function handlePromptNextClick() {
     const promptElement = document.getElementById('prompt');
     promptElement.style.display = 'none';
@@ -34,8 +36,37 @@ function handlePromptNextClick() {
     document.removeEventListener('click', hidePrompt);
 
     // Handle the logic for going to the next question or finishing the game
-    handleNextButtonClick(); // You can replace this with your logic
+    if (currentSoundIndex < animals.length - 1) {
+        // If it's not the last question, load the next sound
+        currentSoundIndex++;
+        loadSound(currentSoundIndex);
+    } else {
+        // If it's the last question, handle the logic for finishing the game
+        handleFinishGame();
+    }
 }
+
+function hidePrompt() {
+    const overlay = document.getElementById('prompt-overlay');
+    const promptElement = document.getElementById('prompt');
+
+    // Hide the overlay and the prompt
+    overlay.style.display = 'none';
+    promptElement.style.display = 'none';
+
+    // Remove the click event listener after hiding the prompt
+    document.removeEventListener('click', hidePrompt);
+
+    // Set isPromptDisplayed to false
+    isPromptDisplayed = false;
+}
+
+
+function handleFinishGame() {
+    // You can add your logic for finishing the game here
+    // This function will be called when the "Finish" button is clicked on the last question
+}
+
 
 
 const animals = [
@@ -223,6 +254,7 @@ function handleOptionClick(event) {
     const clickedButton = event.target.closest('.btn-option');
     const prompt = document.getElementById('prompt');
     const promptText = document.getElementById('prompt-text');
+    const nextButton = document.getElementById('next-button');
 
     if (clickedButton) {
         const isCorrectOption = clickedButton.getAttribute('data-correct') === 'true';
@@ -244,8 +276,42 @@ function handleOptionClick(event) {
             promptText.textContent = 'Oops! That\'s not correct.';
             prompt.style.display = 'block';
         }
-    }
+
+        // Check if it's the last animal
+        if (currentSoundIndex === animals.length - 1) {
+            // Display a "Total Score" button in the prompt
+            const gameOverText = document.createElement('p');
+            gameOverText.textContent = 'Game Over!';
+            promptText.appendChild(gameOverText);
+        
+            const buttonsContainer = document.createElement('div');
+        
+            const totalScoreButton = document.createElement('button');
+            totalScoreButton.textContent = 'Total Score';
+            totalScoreButton.addEventListener('click', handleTotalScoreButtonClick);
+        
+            // Append the button to the buttons container
+            buttonsContainer.appendChild(totalScoreButton);
+        
+            // Hide the Next button for the last animal
+            nextButton.style.display = 'none';
+        
+            // Append the buttons container to the prompt
+            promptText.appendChild(buttonsContainer);
+        } else {
+            // Show the Next button for other animals
+            nextButton.style.display = 'inline-block';
+        }
+    }        
 }
+
+
+function handleTotalScoreButtonClick() {
+    // Handle the functionality for the "Total Score" button
+    // You can display the total score in a different way or navigate to a new page, etc.
+    alert(`Total Score: ${score}`);
+}
+
 
 
     function showPrompt(message) {
@@ -277,7 +343,7 @@ function handleNextButtonClick() {
     // Load the next sound when the "Next" button is clicked
     currentSoundIndex++;
 
-    // Show or hide the "Previous" and "Next" buttons based on the index
+    // Show or hide the "Next" button based on the index
     updateButtonVisibility();
 
     if (currentSoundIndex < animals.length) {
@@ -288,11 +354,10 @@ function handleNextButtonClick() {
     }
 }
 
-
 function updateButtonVisibility() {
-      const nextButton = document.getElementById('next-button');
+    const nextButton = document.getElementById('next-button');
 
-    // Optionally show or hide the "Next" button for the last animal
+    // Optionally hide the "Next" button for the last animal
     // Adjust as needed based on your requirements
     if (currentSoundIndex === animals.length - 1) {
         nextButton.style.display = 'none';
@@ -300,6 +365,7 @@ function updateButtonVisibility() {
         nextButton.style.display = 'inline-block'; // or 'block' based on your styling
     }
 }
+
 
 function endGame() {
     // Remove event listeners from option buttons
@@ -310,7 +376,7 @@ function endGame() {
 
     // Display the user's score
     const scoreElement = document.getElementById('score');
-    scoreElement.textContent = `Score: ${score}`;
+    scoreElement.textContent = `${score}`;
 
     // Reset the game if needed
     // You can add a button or some logic here to reset the game
