@@ -174,7 +174,7 @@ var endangeredAnimals = [
         countries: ['Republic of Congo'],
         description:
             'To know more about these magnificent creatures, visit: <a href="https://www.worldwildlife.org/species/eastern-lowland-gorilla" style="color: #8adf82"; target="_blank">https://www.worldwildlife.org/species/eastern-lowland-gorilla</a>',
-        image: 'animalImages/grauers_gorilla.png',
+        image: 'animalImages/grauer\'s_gorilla.png',
     },
 
     {
