@@ -4,13 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animal Sound Matching Game - Medium</title>
-    <!-- Add CSS and JavaScript references here -->
+    <link rel="stylesheet" href="game.css" />
+
+    <!-- Add CSS references here -->
 </head>
 <body>
-    <h1>Animal Sound Matching Game - Medium</h1>
 
-    <!-- Game Interface for Medium Difficulty -->
-    <!-- Include game elements like audio, options, and scoring here -->
+    <div id="game-over-text" style="display: none;">Game Over!</div>
+    <button id="total-score-button" style="display: none;">Total Score</button>
+
+    <div id="prompt-overlay"></div>
+
+    <div id="prompt" class="prompt">
+        <p id="prompt-text" class="prompt-text"></p>
+        <button id="prompt-next" class="prompt-button">Next</button>
+    </div>
+
+    <div class="container">
+        <div id="game-container">
+            <h1>Animal Sound Matching Game - Medium</h1>
+
+            <audio id="animal-sound" controls autoplay>
+                <!-- Audio source will be loaded by JavaScript -->
+            </audio>
+
+            <!-- Add more audio elements for other animal sounds -->
+
+            <!-- Option containers -->
+            <div id="options">
+                <div class="option-container">
+                    <button class="btn-option"></button>
+                    <p class="animal-name"></p>
+                </div>
+                <div class="option-container">
+                    <button class="btn-option"></button>
+                    <p class="animal-name"></p>
+                </div>
+                <div class="option-container">
+                    <button class="btn-option"></button>
+                    <p class="animal-name"></p>
+                </div>
+                <div class="option-container">
+                    <button class="btn-option"></button>
+                    <p class="animal-name"></p>
+                </div>
+                <!-- more option containers here -->
+            </div>
+
+            <!-- Score display -->
+            <p>Score: <span id="score">0</span></p>
+            
+            <!-- Buttons container -->
+            <div id="buttons-container">
+                <button id="next-button">Next</button>
+            </div>
+
+        </div>
+    </div>
 
     <!-- Include JavaScript file for handling the game logic -->
     <script src="game-medium.js"></script>
