@@ -334,7 +334,7 @@ function handleOptionClick(event) {
 
 function handleTotalScoreButtonClick() {
     // Handle the functionality for the "Total Score" button
-    // You can display the total score in a different way or navigate to a new page, etc.
+    // Display the total score in a different way or navigate to a new page, etc.
     alert(`Total Score: ${score}`);
 }
 

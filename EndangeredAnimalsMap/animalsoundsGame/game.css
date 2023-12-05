@@ -115,6 +115,30 @@ button:hover {
     background-color: #45a049;
 }
 
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: rgb(95, 126, 9); /* Change the background color as needed */
+    color: #fff; /* Change the text color as needed */
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: rgba(0, 179, 30, 0.986); /* Change the background color on hover as needed */
+}
+
+.back-button a {
+    color: #f3f3f3;
+    text-decoration: none;
+}
+
+.back-button a:hover {
+    text-decoration: underline;
+}
+
 #total-score-button {
     display: none;
     margin-top: 10px; /* Add margin to separate it from other elements */
