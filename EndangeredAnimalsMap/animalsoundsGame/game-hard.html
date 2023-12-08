@@ -4,15 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animal Sound Matching Game - Hard</title>
-    <!-- Add CSS and JavaScript references here -->
+    <link rel="stylesheet" href="game.css" />
+
+    <!-- Add CSS references here -->
 </head>
 <body>
-    <h1>Animal Sound Matching Game - Hard</h1>
 
-    <!-- Game Interface for Hard Difficulty -->
-    <!-- Include game elements like audio, options, and scoring here -->
+        <!-- Back button -->
+        <div class="back-button" onclick="goBack()"> 
+            <a href="animalsoundsGame.html">
+            <span>&#8249;</span> Back to Difficulty Selection
+            </a>
+        </div>
 
-    <!-- Include JavaScript file for handling the game logic -->
+    <div id="game-over-text" style="display: none;">Game Over!</div>
+    <button id="total-score-button" style="display: none;">Total Score</button>
+
+    <div id="prompt-overlay"></div>
+
+    <div id="prompt" class="prompt">
+        <p id="prompt-text" class="prompt-text"></p>
+        <button id="prompt-next" class="prompt-button">Next</button>
+    </div>
+
+    <div class="container">
+        <div id="game-container">
+            <h1>Animal Sound Matching Game - Hard</h1>
+
+           <!-- Audio player container -->
+        <div id="audio-container">
+            <audio id="animal-sound" controls autoplay>
+                <!-- Audio source will be loaded by JavaScript -->
+            </audio>
+        </div>
+
+            <!-- Option containers -->
+            <div id="options">
+                <div class="option-container">
+                    <button class="btn-option"></button>
+                    <p class="animal-name"></p>
+                </div>
+                <div class="option-container">
+                    <button class="btn-option"></button>
+                    <p class="animal-name"></p>
+                </div>
+                <div class="option-container">
+                    <button class="btn-option"></button>
+                    <p class="animal-name"></p>
+                </div>
+                <div class="option-container">
+                    <button class="btn-option"></button>
+                    <p class="animal-name"></p>
+                </div>
+                <div class="option-container">
+                    <button class="btn-option"></button>
+                    <p class="animal-name"></p>
+                </div>
+                <div class="option-container">
+                    <button class="btn-option"></button>
+                    <p class="animal-name"></p>
+                </div>
+                <!-- for option containers, here -->
+            </div>
+
+            <!-- Score display -->
+            <p>Score: <span id="score">0</span></p>
+            
+            <!-- Buttons container -->
+            <div id="buttons-container">
+                <button id="next-button">Next</button>
+            </div>
+
+        </div>
+    </div>
+
     <script src="game-hard.js"></script>
 </body>
 </html>
