@@ -9,6 +9,15 @@ body {
     background-color: #f0f0f0;
 }
 
+#audio-container {
+    position: absolute;
+    top: 20px; /* Adjust the top position as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2; /* Set a higher z-index for the audio container */
+    margin-bottom: 20px;
+}
+
 .option-container {
     text-align: center; /* Center the content within the container */
 }
@@ -20,19 +29,25 @@ body {
 #game-container {
     padding: 20px;
     text-align: center; /* Center the content */
+    flex-wrap: wrap;
 }
 
 h1 {
     font-size: 24px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 #options {
-    display: flex;
+    display: flexbox;
+    flex-wrap: wrap;
     flex-direction: row; /* Display options side by side */
     gap: 20px;
     align-items: center; /* Center options vertically */
     justify-content: center; /* Center options horizontally */
+    margin-top: 20px;
+    margin-bottom: 20px;
+
 }
 
 .btn-option {
